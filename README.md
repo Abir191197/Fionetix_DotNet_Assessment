@@ -96,6 +96,25 @@ Open **http://localhost:5173** in your browser.
 - ✅ FluentValidation (NID: 10/17 digits, Phone: BD format)
 - ✅ Unique NID enforcement at database level
 - ✅ Seed data: 10 Bangladeshi employees on first run
+- ✅ Docker Compose (one command to run everything)
+
+## Screenshots
+
+### Login Page
+
+![Login](screenshots/1-login.png)
+
+### Employee List
+
+![Employee List](screenshots/2-employee-list.png)
+
+### Search (Debounced 400ms)
+
+![Search](screenshots/3-search.png)
+
+### Employee Detail (with Spouse & Children)
+
+![Employee Detail](screenshots/4-employee-detail.png)
 
 ## Project Structure
 
