@@ -7,7 +7,7 @@ A full-stack Employee Management System built with **.NET 10** (Web API) and **R
 ### 1. Clone the Repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/Abir191197/Fionetix_DotNet_Assessment.git
 cd Fionetix_DotNet_Assessment
 ```
 
