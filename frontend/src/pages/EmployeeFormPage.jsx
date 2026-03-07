@@ -75,7 +75,7 @@ export default function EmployeeFormPage() {
         message.success('Employee updated successfully');
         navigate(`/employees/${id}`);
       } else {
-        message.error(typeof result.payload === 'string' ? result.payload : 'Failed to update. Check your input.');
+        showApiErrors(result.payload, 'update');
       }
     } else {
       result = await dispatch(createEmployee(payload));
@@ -83,8 +83,19 @@ export default function EmployeeFormPage() {
         message.success('Employee created successfully');
         navigate('/');
       } else {
-        message.error(typeof result.payload === 'string' ? result.payload : 'Failed to create. Check your input.');
+        showApiErrors(result.payload, 'create');
       }
+    }
+  };
+
+  const showApiErrors = (payload, action) => {
+    if (Array.isArray(payload)) {
+      // Show each validation error from API
+      payload.forEach((err) => message.error(err));
+    } else if (typeof payload === 'string') {
+      message.error(payload);
+    } else {
+      message.error(`Failed to ${action} employee. Check your input.`);
     }
   };
 
@@ -185,8 +196,15 @@ export default function EmployeeFormPage() {
             <Form.Item name={['spouse', 'name']} label="Spouse Name" style={{ flex: 1 }}>
               <Input placeholder="Spouse full name" />
             </Form.Item>
-            <Form.Item name={['spouse', 'nid']} label="Spouse NID" style={{ flex: 1 }}>
-              <Input placeholder="Spouse NID" />
+            <Form.Item
+              name={['spouse', 'nid']}
+              label="Spouse NID"
+              style={{ flex: 1 }}
+              rules={[
+                { pattern: /^(\d{10}|\d{17})$/, message: 'NID must be 10 or 17 digits', warningOnly: false },
+              ]}
+            >
+              <Input placeholder="10 or 17 digits" />
             </Form.Item>
           </Space>
 

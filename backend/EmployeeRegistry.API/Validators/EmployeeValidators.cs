@@ -34,6 +34,10 @@ public class CreateEmployeeValidator : AbstractValidator<CreateEmployeeRequest>
         {
             RuleFor(x => x.Spouse!.Name)
                 .NotEmpty().WithMessage("Spouse name is required.");
+            RuleFor(x => x.Spouse!.NID)
+                .MaximumLength(17).WithMessage("Spouse NID cannot exceed 17 characters.")
+                .Matches(@"^\d*$").When(x => !string.IsNullOrEmpty(x.Spouse?.NID))
+                .WithMessage("Spouse NID must contain only digits.");
         });
 
         RuleForEach(x => x.Children).ChildRules(child =>
@@ -77,6 +81,10 @@ public class UpdateEmployeeValidator : AbstractValidator<UpdateEmployeeRequest>
         {
             RuleFor(x => x.Spouse!.Name)
                 .NotEmpty().WithMessage("Spouse name is required.");
+            RuleFor(x => x.Spouse!.NID)
+                .MaximumLength(17).WithMessage("Spouse NID cannot exceed 17 characters.")
+                .Matches(@"^\d*$").When(x => !string.IsNullOrEmpty(x.Spouse?.NID))
+                .WithMessage("Spouse NID must contain only digits.");
         });
 
         RuleForEach(x => x.Children).ChildRules(child =>
